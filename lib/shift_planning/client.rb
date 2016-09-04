@@ -37,7 +37,7 @@ module ShiftPlanning
           "password" => @password
         }
       })
-      response = HTTP.with(@headers).post(@url, body)
+      response = HTTP.headers(@headers).post(@url, body)
       @token = JSON.parse(response)["token"]
     end
 
@@ -50,7 +50,7 @@ module ShiftPlanning
         "module" => api_module,
         "request" => request
       })
-      response = HTTP.with(@headers).post(@url, body)
+      response = HTTP.headers(@headers).post(@url, body)
       result = JSON.parse(response)
       raise ApiError.new(result) if @strict && is_error_response?(result)
       result
